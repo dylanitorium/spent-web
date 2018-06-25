@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "firebase": "^5.1.0",
+    "reselect": "^3.0.1"
+  }
+}
