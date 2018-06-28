@@ -1,3 +1,12 @@
+@import 'spent/view/utils/sass/utils.scss';
+
 .button {
-  border: 1px solid #000000;
+  border: 1px solid $gray;
+  background-color: $gray;
+  font-size: 1.25rem;
+  font-weight: $font-weight-normal;
+  font-family: $font-family;
+  color: $white;
+  width: 100%;
+  height: 60px;
 }
