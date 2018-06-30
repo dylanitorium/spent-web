@@ -1,6 +1,33 @@
-
+$black: #2B2B2B;
 $gray: #6C6C6C;
+$gray-light: #B4AFAF;
 $white: #F6F6F6;
+
+$theme-colors: (
+  'black': $black,
+  'gray': $gray,
+  'gray-light': $gray-light,
+  'white': $white,
+);
+
+$sides: (
+  'top',
+  'right',
+  'bottom',
+  'left',
+);
+
+$horizontal: (
+  'left',
+  'center',
+  'right',
+);
+
+$vertical: (
+  'top',
+  'center',
+  'bottom',
+);
 
 $font-weight-normal: 300;
 $font-family: 'Source Sans Pro', sans-serif;

@@ -1,0 +1,7 @@
+@import 'spent/view/utils/sass/utils.scss';
+
+@each $alignment in $horizontal {
+  .#{$alignment} {
+    text-align: #{$alignment};
+  }
+}
