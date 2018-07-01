@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import './fade.css'
+import './swipe.css'
 
-const Fade = ({ children, location }) => (
+const Swipe = ({ children, location }) => (
   <TransitionGroup>
     <CSSTransition key={location.key} timeout={{ enter: 300, exit: 0 }} classNames="fade">
       <Switch location={location}>
@@ -13,4 +13,4 @@ const Fade = ({ children, location }) => (
   </TransitionGroup>
 );
 
-export default Fade;
+export default Swipe;

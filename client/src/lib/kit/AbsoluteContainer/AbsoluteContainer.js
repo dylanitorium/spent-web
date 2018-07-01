@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 const AbsoluteContainer = (props) => {
-  const { children, top, right, bottom, left } = props;
-
-
+  const {
+    children, top, right, bottom,
+    left, zIndex
+  } = props;
 
   return (
     <div className={styles.container} style={{
-      top, right, bottom, left
+      top, right, bottom, left,
+      zIndex
     }}>
       {children}
     </div>
@@ -34,6 +36,10 @@ AbsoluteContainer.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]),
+  zIndex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 
@@ -42,6 +48,7 @@ AbsoluteContainer.defaultProps = {
   right: 'initial',
   bottom: 'initial',
   left: 'initial',
+  zIndex: 'initial',
 };
 
 export default AbsoluteContainer;

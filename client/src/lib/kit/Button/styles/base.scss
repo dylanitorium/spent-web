@@ -4,9 +4,16 @@
   border: 1px solid $gray;
   background-color: $gray;
   color: $white;
+  cursor: pointer;
   font-size: 1.25rem;
   font-weight: $font-weight-normal;
   font-family: $font-family;
   height: 60px;
   width: 100%;
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+  }
 }
