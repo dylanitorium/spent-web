@@ -1,32 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import { colors, alignments, margins } from './styles';
+import { colors, alignments, margins, displays } from './styles';
 
-
-const Text = ({ children, color, align, margin }) => (
-  <div
+const Text = ({
+  children, color, align, margin,
+  display
+}) => (
+  <span
     className={cssUtils.conditionalClasses({
-      [colors[color]]: !!color,
       [alignments[align]]: !!align,
+      [colors[color]]: !!color,
+      [displays[display]]: !!display,
       [margins[margin]]: !!margin,
     })}
   >
     {children}
-  </div>
+  </span>
 );
 
 Text.propTypes = {
   align: PropTypes.oneOf(['left', 'center', 'right', false]),
-  margin: PropTypes.oneOf(['top', 'right', 'bottom', 'left', false]),
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(['gray', 'gray-light', 'black', false]),
+  color: PropTypes.oneOf(['gray', 'gray-light', 'black', 'primary', false]),
+  display: PropTypes.oneOf(['inline', 'inline-block', 'block', 'none', false]),
+  margin: PropTypes.oneOf(['top', 'right', 'bottom', 'left', false]),
 };
 
 Text.defaultProps = {
   align: 'left',
+  color: 'black',
+  display: 'block',
   margin: 'bottom',
-  color: 'black'
 };
 
 export default Text;

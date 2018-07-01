@@ -1,0 +1,7 @@
+@import 'spent/view/utils/sass/utils.scss';
+
+@each $display in $displays {
+  .#{$display} {
+    display: #{$display};
+  }
+}

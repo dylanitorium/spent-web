@@ -2,12 +2,14 @@ $black: #2B2B2B;
 $gray: #6C6C6C;
 $gray-light: #B4AFAF;
 $white: #F6F6F6;
+$primary: #B54EC7;
 
 $theme-colors: (
   'black': $black,
   'gray': $gray,
   'gray-light': $gray-light,
   'white': $white,
+  'primary': $primary,
 );
 
 $sides: (
@@ -17,16 +19,23 @@ $sides: (
   'left',
 );
 
-$horizontal: (
-  'left',
-  'center',
-  'right',
+$horizontals: (
+  'left': flex-start,
+  'center': center,
+  'right': flex-end,
 );
 
-$vertical: (
-  'top',
-  'center',
-  'bottom',
+$verticals: (
+  'top': flex-start,
+  'center': center,
+  'bottom': flex-end,
+);
+
+$displays: (
+  'inline',
+  'inline-block',
+  'block',
+  'none',
 );
 
 $font-weight-normal: 300;

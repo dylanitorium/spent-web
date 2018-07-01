@@ -2,6 +2,7 @@
 
 @each $alignment, $flex in $horizontals {
   .#{$alignment} {
-    text-align: #{$alignment};
+    justify-content: $flex;
   }
 }
+

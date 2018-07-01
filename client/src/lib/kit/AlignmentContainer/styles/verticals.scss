@@ -1,0 +1,8 @@
+@import 'spent/view/utils/sass/utils.scss';
+
+@each $alignment, $flex in $verticals {
+  .#{$alignment} {
+    align-items: $flex;
+  }
+}
+

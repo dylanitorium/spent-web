@@ -1,26 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import base from './base.scss';
-import horizontalClasses from './horizontal.scss';
-import verticalClasses from './vertical.scss';
-
-
-const directions = {
-  vertical: [
-    'top', 'center', 'bottom'
-  ],
-  horizontal: [
-    'left', 'center', 'right'
-  ],
-};
-
+import { base, horizontals, verticals } from './styles';
 
 const AlignmentContainer = ({ children, vertical, horizontal }) => (
   <div className={cssUtils.conditionalClasses({
     [base.container]: true,
-    [verticalClasses[vertical]]: true,
-    [horizontalClasses[horizontal]]: true,
+    [horizontals[horizontal]]: true,
+    [verticals[vertical]]: true,
   })}>
     {children}
   </div>
@@ -28,8 +15,8 @@ const AlignmentContainer = ({ children, vertical, horizontal }) => (
 
 AlignmentContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  vertical: PropTypes.oneOf(directions.vertical),
-  horizontal: PropTypes.oneOf(directions.horizontal),
+  vertical: PropTypes.oneOf(['top', 'center', 'bottom']),
+  horizontal: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 AlignmentContainer.defaultProps = {
