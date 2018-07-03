@@ -90,6 +90,7 @@ module.exports = {
       'react-native': 'react-native-web',
       'spent' : path.resolve('src'),
       'kit': path.resolve('src/lib/kit'),
+      'react-router-css-transition': path.resolve('src/lib/react-router-css-transition'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

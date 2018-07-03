@@ -1,0 +1,59 @@
+.swipe-enter-push {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.swipe-enter-push-active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.swipe-exit-pop,
+.swipe-exit-replace {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.swipe-exit-pop-active,
+.swipe-exit-replace-active {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.swipe-enter-pop {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.swipe-enter-pop-active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.swipe-exit-push {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.swipe-exit-push-active {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s ease;
+}
+
+

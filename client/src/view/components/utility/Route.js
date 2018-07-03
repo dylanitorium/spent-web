@@ -37,6 +37,4 @@ Route.defaultProps = {
   requiresAuth: false,
 };
 
-console.log(Route);
-
 export default Route;

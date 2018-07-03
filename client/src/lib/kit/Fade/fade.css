@@ -7,7 +7,7 @@
 .fade-enter-active {
   visibility: visible;
   opacity: 1;
-  transition: opacity 1s ease, visibilty 1s ease;
+  transition: opacity 0.3s ease, visibilty 0.3s ease;
 }
 
 .fade-exit {
