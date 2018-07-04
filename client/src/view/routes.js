@@ -1,7 +1,10 @@
 export const routes = ({
   auth: {
     index: '/auth',
-    sign_in: '/auth/sign-in',
+    sign_in: {
+      index: '/auth/sign-in',
+      email: '/auth/sign-in/email'
+    },
     sign_up: '/auth/sign-up',
   },
   dashboard: '/dashboard',
