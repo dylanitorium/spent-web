@@ -1,15 +1,21 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
+import ReactRouterCSSTransition from 'react-router-css-transition';
 import './fade.css'
 
-const Fade = ({ children, location }) => (
+const Fade = ({ children, location, history }) => (
   <TransitionGroup>
-    <CSSTransition key={location.key} timeout={300} classNames="fade">
+    <ReactRouterCSSTransition
+      key={location.key}
+      timeout={300}
+      classNames="fade"
+      history={history}
+    >
       <Switch location={location}>
         {children}
       </Switch>
-    </CSSTransition>
+    </ReactRouterCSSTransition>
   </TransitionGroup>
 );
 

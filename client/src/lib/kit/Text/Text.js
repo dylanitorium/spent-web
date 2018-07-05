@@ -5,9 +5,10 @@ import { colors, alignments, margins, displays } from './styles';
 
 const Text = ({
   children, color, align, margin,
-  display
+  display, ...props
 }) => (
   <span
+    {...props}
     className={cssUtils.conditionalClasses({
       [alignments[align]]: !!align,
       [colors[color]]: !!color,

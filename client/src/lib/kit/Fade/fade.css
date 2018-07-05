@@ -1,15 +1,47 @@
-.fade-enter {
+.fade-enter-push {
   visibility: hidden;
   opacity: 0;
   z-index: 1;
 }
 
-.fade-enter-active {
+.fade-enter-push-active {
   visibility: visible;
   opacity: 1;
-  transition: opacity 0.3s ease, visibilty 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.fade-exit {
-  display: none;
+.fade-exit-push {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.fade-exit-push-active {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.fade-enter-pop {
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter-pop-active {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.fade-exit-pop {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.fade-exit-pop-active {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
 }

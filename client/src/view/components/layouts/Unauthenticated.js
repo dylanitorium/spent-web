@@ -32,12 +32,12 @@ const Unauthenticated = () => (
     <main>
       <AbsoluteContainer top={80} left={0} right={0}>
         <Title align="center">Spent.</Title>
-        <Fade location={location}>
+        <Fade history={history} location={location}>
           <Route path={routes.auth.sign_in.index} component={() => (
-            <Title level="two" align="center">Welcome back!</Title>
+            <Title id="welcome_back" level="two" align="center">Welcome back!</Title>
           )} />
           <Route path={routes.auth.sign_up} component={() => (
-            <Title level="two" align="center">Let's get started!</Title>
+            <Title id="lets_get_started" level="two" align="center">Let's get started!</Title>
           )} />
         </Fade>
       </AbsoluteContainer>
@@ -58,7 +58,7 @@ const Unauthenticated = () => (
           </FullScreenAlign>
         )} />
         <Route path={routes.auth.sign_in.email} component={() => (
-          <FullScreenAlign id="sign_in">
+          <FullScreenAlign id="sign_in_email">
             <Text>Use ya email</Text>
           </FullScreenAlign>
         )} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { parsePath } from 'history';
 
 
 const linkableComponent = (WrappedComponent) => {
@@ -36,7 +37,16 @@ const linkableComponent = (WrappedComponent) => {
         return;
       }
 
-      history.push(to);
+      const { state, key, ...from } = history.location
+
+      const location = {
+        ...parsePath(to),
+        state: {
+          from
+        },
+      }
+
+      history.push(location);
     }
 
     render() {

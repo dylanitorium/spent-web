@@ -2,21 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import addOneClass from 'dom-helpers/class/addClass';
 import removeOneClass from 'dom-helpers/class/removeClass';
+import RouterTransition from './Transition';
 
 import { Transition, CSSTransition } from 'react-transition-group';
 
 const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
 const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
 
-const HISTORY_ACTIONS = {
-  POP: 'POP',
-  PUSH: 'PUSH',
-  REPLACE: 'REPLACE'
-};
-
 const propTypes = {
   ...CSSTransition.propTypes,
-  action: PropTypes.oneOf(Object.keys(HISTORY_ACTIONS)),
   history: PropTypes.object,
 };
 
@@ -48,7 +42,6 @@ class ReactRouterCSSTransition extends React.Component {
     const { doneClassName } = this.getClassNames('enter');
 
     this.removeClasses(node, appearing ? 'appear' : 'enter');
-    addClass(node, doneClassName);
 
     if (this.props.onEntered) {
       this.props.onEntered(node)
@@ -135,7 +128,7 @@ class ReactRouterCSSTransition extends React.Component {
     delete props.classNames;
 
     return (
-      <Transition
+      <RouterTransition
         {...props}
         onEnter={this.onEnter}
         onEntered={this.onEntered}

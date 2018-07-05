@@ -12,11 +12,12 @@ const tags = {
  'six': 'h6',
 };
 
-const Title = ({ children, level, align }) => {
+const Title = ({ children, level, align, ...props }) => {
   const Component = tags[level];
 
   return (
     <Component
+      {...props}
       className={
         cssUtils.conditionalClasses({
           [alignments[align]]: !!align,
