@@ -17,6 +17,7 @@ const HISTORY_ACTIONS = {
 const propTypes = {
   ...CSSTransition.propTypes,
   action: PropTypes.oneOf(Object.keys(HISTORY_ACTIONS)),
+  history: PropTypes.object,
 };
 
 class ReactRouterCSSTransition extends React.Component {
@@ -90,7 +91,7 @@ class ReactRouterCSSTransition extends React.Component {
   }
 
   getClassNames = (type) => {
-    const { classNames, action } = this.props;
+    const { classNames, history: { action } } = this.props;
 
     let className = typeof classNames !== 'string'
       ? classNames[type] + '-' + action.toLowerCase()
@@ -149,5 +150,6 @@ class ReactRouterCSSTransition extends React.Component {
 
 ReactRouterCSSTransition.propTypes = propTypes;
 
-export default ReactRouterCSSTransition
+export default ReactRouterCSSTransition;
+
 

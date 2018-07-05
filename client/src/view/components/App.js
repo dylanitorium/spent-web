@@ -4,7 +4,7 @@ import { Router, Switch, Redirect } from 'react-router-dom';
 import { store } from 'spent/state';
 import { AUTHENTICATED, UNAUTHENTICATED } from 'spent/view/routes';
 import { Unauthenticated } from 'spent/view/components/layouts';
-import { actions } from 'spent/state/modules/history'
+import { actions } from 'spent/state/modules/history';
 import createHistory from 'history/createBrowserHistory';
 import Route from 'spent/view/components/connected/Route';
 

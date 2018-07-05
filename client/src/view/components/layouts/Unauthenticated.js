@@ -15,7 +15,6 @@ import {
 import { Link } from 'react-router-dom';
 import { routes } from 'spent/view/routes';
 
-
 const LinkedText = props => <Link to={props.to}><Text {...props} color="primary" display="inline" /></Link>;
 
 const FullScreenAlign = ({ children, id }) => (
@@ -33,16 +32,16 @@ const Unauthenticated = () => (
     <main>
       <AbsoluteContainer top={80} left={0} right={0}>
         <Title align="center">Spent.</Title>
-        <Fade history={history}>
-          <Route exact path={routes.auth.sign_in} component={() => (
+        <Fade location={location}>
+          <Route path={routes.auth.sign_in.index} component={() => (
             <Title level="two" align="center">Welcome back!</Title>
           )} />
-          <Route exact path={routes.auth.sign_up} component={() => (
+          <Route path={routes.auth.sign_up} component={() => (
             <Title level="two" align="center">Let's get started!</Title>
           )} />
         </Fade>
       </AbsoluteContainer>
-      <Swipe history={history}>
+      <Swipe history={history} location={location}>
         <Route exact path={routes.auth.index} component={() => (
           <FullScreenAlign id="index">
             <Button to={routes.auth.sign_in.index} margin="bottom">Sign In</Button>

@@ -2,15 +2,16 @@ const actionTypes = {
   transition: 'spent/history/transition'
 };
 
-const transition = action => ({
+const transition = ({ location, action }) => ({
   type: actionTypes.transition,
+  location,
   action
 });
 
 const actions = {
   listen: (history) => (dispatch) => {
-    history.listen((_location, action) => {
-      dispatch(transition(action));
+    history.listen((location, action) => {
+      dispatch(transition({ location, action }));
     });
   },
 }
@@ -31,6 +32,7 @@ const reducer = (state = { action: null }, action) => {
 
 const baseSelectors = {
   action: state => state.history.action,
+  location: state => state.history.location,
 };
 
 const selectors = {
