@@ -1,8 +1,9 @@
-export { AbsoluteContainer } from './AbsoluteContainer';
-export { AlignmentContainer } from './AlignmentContainer';
-export { Button } from './Button';
-export { Container } from './Container';
-export { Fade } from './Fade';
-export { Text } from './Text';
-export { Title } from './Title';
-export { Swipe } from './Swipe';
+export { AbsoluteContainer } from './components/AbsoluteContainer';
+export { AlignmentContainer } from './components/AlignmentContainer';
+export { Button } from './components/Button';
+export { Container } from './components/Container';
+export { Fade } from './components/Fade';
+export { Input } from './components/Input';
+export { Text } from './components/Text';
+export { Title } from './components/Title';
+export { Swipe } from './components/Swipe';

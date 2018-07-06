@@ -4,7 +4,7 @@ import addOneClass from 'dom-helpers/class/addClass';
 import removeOneClass from 'dom-helpers/class/removeClass';
 import RouterTransition from './Transition';
 
-import { Transition, CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
 const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
@@ -39,8 +39,6 @@ class ReactRouterCSSTransition extends React.Component {
   }
 
   onEntered = (node, appearing) => {
-    const { doneClassName } = this.getClassNames('enter');
-
     this.removeClasses(node, appearing ? 'appear' : 'enter');
 
     if (this.props.onEntered) {
@@ -71,10 +69,6 @@ class ReactRouterCSSTransition extends React.Component {
   }
 
   onExited = (node) => {
-    const { doneClassName } = this.getClassNames('exit');
-
-    addClass(node, doneClassName);
-
     this.removeClasses(node, 'exit');
 
 

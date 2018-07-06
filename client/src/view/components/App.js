@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Switch, Redirect } from 'react-router-dom';
 import { store } from 'spent/state';

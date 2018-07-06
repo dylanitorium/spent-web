@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import { alignments, levels } from './styles';
+import { levels } from './styles';
+import provide, { alignment } from 'kit/providers';
 
 const tags = {
  'one': 'h1',
@@ -12,7 +13,7 @@ const tags = {
  'six': 'h6',
 };
 
-const Title = ({ children, level, align, ...props }) => {
+const Title = ({ children, level, className, ...props }) => {
   const Component = tags[level];
 
   return (
@@ -20,8 +21,8 @@ const Title = ({ children, level, align, ...props }) => {
       {...props}
       className={
         cssUtils.conditionalClasses({
-          [alignments[align]]: !!align,
           [levels[level]]: !!level,
+          [className]: true,
         })
       }
     >
@@ -31,15 +32,14 @@ const Title = ({ children, level, align, ...props }) => {
 }
 
 Title.propTypes = {
-  align: PropTypes.oneOf(['left', 'center', 'right', false]),
+  className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   level: PropTypes.oneOf(['one', 'two', 'three', 'four', 'five', 'six', false]),
 };
 
 Title.defaultProps = {
-  align: 'left',
   level: 'one',
 }
 
-export default Title;
+export default provide(alignment())(Title);
 

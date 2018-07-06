@@ -8,6 +8,7 @@ import {
   Title,
   Fade,
   Swipe,
+  Input,
 } from 'kit';
 import {
   LinkButton as Button,
@@ -59,7 +60,8 @@ const Unauthenticated = () => (
         )} />
         <Route path={routes.auth.sign_in.email} component={() => (
           <FullScreenAlign id="sign_in_email">
-            <Text>Use ya email</Text>
+            <Input placeholder="Email" />
+            <Input placeholder="Password" />
           </FullScreenAlign>
         )} />
         <Route path={routes.auth.sign_up} component={() => (
