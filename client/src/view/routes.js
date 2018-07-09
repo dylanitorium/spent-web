@@ -5,7 +5,10 @@ export const routes = ({
       index: '/auth/sign-in',
       email: '/auth/sign-in/email'
     },
-    sign_up: '/auth/sign-up',
+    sign_up: {
+      index: '/auth/sign-up',
+      email: '/auth/sign-up/email'
+    },
   },
   dashboard: '/dashboard',
 });

@@ -15,6 +15,7 @@ import {
 } from 'spent/view/components/utility';
 import { Link } from 'react-router-dom';
 import { routes } from 'spent/view/routes';
+import UserForm from 'spent/view/components/pure/UserForm';
 
 const LinkedText = props => <Link to={props.to}><Text {...props} color="primary" display="inline" /></Link>;
 
@@ -37,7 +38,7 @@ const Unauthenticated = () => (
           <Route path={routes.auth.sign_in.index} component={() => (
             <Title id="welcome_back" level="two" align="center">Welcome back!</Title>
           )} />
-          <Route path={routes.auth.sign_up} component={() => (
+          <Route path={routes.auth.sign_up.index} component={() => (
             <Title id="lets_get_started" level="two" align="center">Let's get started!</Title>
           )} />
         </Fade>
@@ -47,7 +48,7 @@ const Unauthenticated = () => (
           <FullScreenAlign id="index">
             <Button to={routes.auth.sign_in.index} margin="bottom">Sign In</Button>
             <Text color="gray-light" align="center">
-              Don't have an account? <LinkedText to={routes.auth.sign_up}>Get started</LinkedText>
+              Don't have an account? <LinkedText to={routes.auth.sign_up.index}>Get started</LinkedText>
             </Text>
           </FullScreenAlign>
         )} />
@@ -60,15 +61,19 @@ const Unauthenticated = () => (
         )} />
         <Route path={routes.auth.sign_in.email} component={() => (
           <FullScreenAlign id="sign_in_email">
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
+            <UserForm onSubmit={() => {}} buttonText="Sign in" />
           </FullScreenAlign>
         )} />
-        <Route path={routes.auth.sign_up} component={() => (
+        <Route exact path={routes.auth.sign_up.index} component={() => (
           <FullScreenAlign id="sign_up">
             <Button margin="bottom" outline color="google">Sign up with Google</Button>
             <Button margin="bottom" outline color="facebook">Sign up with Facebook</Button>
-            <Button outline>Sign up with Email</Button>
+            <Button outline to={routes.auth.sign_up.email}>Sign up with Email</Button>
+          </FullScreenAlign>
+        )} />
+        <Route path={routes.auth.sign_up.email} component={() => (
+          <FullScreenAlign id="sign_up_email">
+            <UserForm onSubmit={() => { }} buttonText="Sign up" />
           </FullScreenAlign>
         )} />
       </Swipe>

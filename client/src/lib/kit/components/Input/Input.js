@@ -2,19 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
 import provide, { margin } from 'kit/providers';
-import { base } from './styles';
+import { base, icons } from './styles';
 
-const Input = ({ className, ...props}) => {
+const Input = ({ className, rightIcon, ...props}) => {
   return (
-    <input
-      type='text'
-      className={cssUtils.conditionalClasses({
-        [base.input]: true,
-        [className]: true,
-      })}
-      {...props}
-    />
+    <div className={base.container}>
+      <input
+        type='text'
+        className={cssUtils.conditionalClasses({
+          [className]: true,
+          [base.input]: true,
+          [base.iconRight]: !!rightIcon,
+        })}
+        {...props}
+      />
+      { rightIcon &&
+        <div className={icons.rightIcon}>
+          {rightIcon}
+        </div>
+      }
+    </div>
   )
 };
+
+Input.propTypes = {
+  rightIcon: PropTypes.node,
+}
+
+Input.defaultProps = {
+  rightIcon: undefined,
+}
 
 export default provide(margin())(Input);

@@ -20,11 +20,12 @@ const Button = ({ children, onClick, className }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 }
 
 Button.defaultProps = {
   outline: false,
+  onClick: () => {},
 };
 
 const ThemedButton = ({ outline, ...props }) => {
