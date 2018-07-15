@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import provide, { margin } from 'kit/providers';
-import { base, icons } from './styles';
+import provide, { margin, color } from 'kit/providers';
+import { base, icons, colors } from './styles';
 
 const Input = ({ className, rightIcon, ...props}) => {
   return (
@@ -33,4 +33,7 @@ Input.defaultProps = {
   rightIcon: undefined,
 }
 
-export default provide(margin())(Input);
+export default provide(
+  margin(),
+  color(colors)
+)(Input);

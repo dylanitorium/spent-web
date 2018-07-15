@@ -1,4 +1,4 @@
-'use strict';
+
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
@@ -91,6 +91,7 @@ module.exports = {
       'spent' : path.resolve('src'),
       'kit': path.resolve('src/lib/kit'),
       'react-router-css-transition': path.resolve('src/lib/react-router-css-transition'),
+      'focal': path.resolve('src/lib/focal'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

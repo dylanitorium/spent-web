@@ -5,13 +5,13 @@ import styles from './styles.scss';
 const AbsoluteContainer = (props) => {
   const {
     children, top, right, bottom,
-    left, zIndex, ...rest
+    left, zIndex, style, ...rest
   } = props;
 
   return (
     <div className={styles.container} style={{
       top, right, bottom, left,
-      zIndex
+      zIndex, ...style,
     }} {...rest}>
       {children}
     </div>

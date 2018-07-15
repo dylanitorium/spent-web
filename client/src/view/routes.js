@@ -1,13 +1,13 @@
-export const routes = ({
+const routes = ({
   auth: {
-    index: '/auth',
+    index: '/',
     sign_in: {
-      index: '/auth/sign-in',
-      email: '/auth/sign-in/email'
+      index: '/sign-in',
+      email: '/sign-in/email'
     },
     sign_up: {
-      index: '/auth/sign-up',
-      email: '/auth/sign-up/email'
+      index: '/sign-up',
+      email: '/sign-up/email'
     },
   },
   dashboard: '/dashboard',
@@ -15,3 +15,4 @@ export const routes = ({
 
 export const AUTHENTICATED = routes.dashboard;
 export const UNAUTHENTICATED = routes.auth.index;
+export default routes;

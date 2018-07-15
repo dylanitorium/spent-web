@@ -1,5 +1,6 @@
 const actionTypes = {
-  transition: 'spent/history/transition'
+  transition: 'spent/history/transition',
+  listening: 'spent/history/listening'
 };
 
 const transition = ({ location, action }) => ({
@@ -8,8 +9,13 @@ const transition = ({ location, action }) => ({
   action
 });
 
+const listening = () => ({
+  type: actionTypes.listening,
+});
+
 const actions = {
   listen: (history) => (dispatch) => {
+    dispatch(listening());
     history.listen((location, action) => {
       dispatch(transition({ location, action }));
     });

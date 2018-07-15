@@ -1,4 +1,6 @@
 import { createSelector } from 'reselect';
+import focal from 'focal';
+import { AUTHENTICATED, UNAUTHENTICATED } from 'spent/view/routes';
 import authentication from 'spent/state/utils/auth';
 
 const createAsyncActionCreator = name => ({
@@ -9,36 +11,114 @@ const createAsyncActionCreator = name => ({
 
 const actionTypes = {
   authenticate: createAsyncActionCreator('auth/authenticate'),
+  unauthenticate: createAsyncActionCreator('auth/unauthenticate'),
+  listening: 'spent/auth/listening',
 };
 
-const syncActions = {
+const reducerActions = {
   authenticate: {
     start: () => ({ type: actionTypes.authenticate.start }),
-    success: () => ({ type: actionTypes.authenticate.success }),
-    failure: () => ({ type: actionTypes.authenticate.failure })
-  }
+    success: (user) => ({ type: actionTypes.authenticate.success, user }),
+    failure: (error) => ({ type: actionTypes.authenticate.failure, error })
+  },
+  unauthenticate: {
+    start: () => ({ type: actionTypes.unauthenticate.start }),
+    success: () => ({ type: actionTypes.unauthenticate.success }),
+    failure: (error) => ({ type: actionTypes.unauthenticate.failure, error })
+  },
+  listening: () => ({ type: actionTypes.listening })
 };
 
-const asyncActions = {
+const actions = {
   authenticate: {
     withEmailAndPassword: ({ email, password }) => (dispatch) => {
-      dispatch(syncActions.authenticate.start());
+      dispatch(reducerActions.authenticate.start());
       authentication.startSession.with.emailAndPassword(email, password)
-        .then(() => dispatch(syncActions.authenticate.success()))
-        .catch((error) => dispatch(syncActions.authenticate.failure()));
+        .catch((error) => dispatch(reducerActions.authenticate.failure(error)));
+    },
+    withGoogle: () => (dispatch) => {
+      focal.set('lm', 'lm');
+      // history.replace(history.location.pathname + '?message=Loading');
+      dispatch(reducerActions.authenticate.start());
+      authentication.startSession.with.google()
+        .catch((error) => dispatch(reducerActions.authenticate.failure(error)));
     }
+  },
+  createUser: {
+    withEmailAndPassword: ({ email, password }) => (dispatch) => {
+      dispatch(reducerActions.authenticate.start());
+      authentication.createUser.with.emailAndPassword(email, password)
+        .catch((error) => dispatch(reducerActions.authenticate.failure(error)));
+    }
+  },
+  listen: (history) => async (dispatch) => {
+    dispatch(reducerActions.listening());
+
+    authentication.listen((user, error) => {
+      if (error) {
+        dispatch(reducerActions.authenticate.failure(error));
+      } else if (user) {
+        dispatch(reducerActions.authenticate.success(user));
+      } else {
+        dispatch(reducerActions.unauthenticate.success());
+      }
+    });
+  },
+  unauthenticate: () => (dispatch) => {
+    dispatch(reducerActions.unauthenticate.start());
+    authentication.endSession()
+      .catch((error) => dispatch(reducerActions.unauthenticate.failure(error)))
   }
 };
 
 const initialState = {
+  loading: true,
+  error: undefined,
   user: undefined,
 }
 
 const reducer = (state = initialState, action) => {
-  return state;
+  const { type, ...payload } = action;
+
+  switch(type) {
+    case actionTypes.unauthenticate.start:
+    case actionTypes.authenticate.start:
+      return {
+        ...state,
+        loading: true,
+      }
+    case actionTypes.authenticate.success:
+      return {
+        ...state,
+        user: payload.user,
+        loading: false,
+      }
+    case actionTypes.authenticate.failure:
+      return {
+        ...state,
+        user: undefined,
+        error: payload.error,
+        loading: false,
+      }
+    case actionTypes.unauthenticate.success:
+      return {
+        ...state,
+        user: undefined,
+        loading: false,
+      }
+    case actionTypes.unauthenticate.failure:
+      return {
+        ...state,
+        error: payload.error,
+        loading: false,
+      }
+    default:
+      return state;
+  }
 };
 
 const baseSelectors = {
+  loading: state => state.auth.loading,
   user: state => state.auth.user,
 };
 
@@ -51,4 +131,4 @@ const selectors = {
   ...derivedSelectors,
 };
 
-export { reducer, selectors };
+export { reducer, selectors, actions };

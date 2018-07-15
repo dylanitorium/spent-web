@@ -37,16 +37,7 @@ const linkableComponent = (WrappedComponent) => {
         return;
       }
 
-      const { state, key, ...from } = history.location
-
-      const location = {
-        ...parsePath(to),
-        state: {
-          from
-        },
-      }
-
-      history.push(location);
+      history.push(to);
     }
 
     render() {

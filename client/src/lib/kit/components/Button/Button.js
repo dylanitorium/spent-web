@@ -4,12 +4,14 @@ import { cssUtils } from 'spent/view/utils';
 import { base, colors, outlines } from './styles';
 import provide, { margin, color } from 'kit/providers';
 
-const Button = ({ children, onClick, className }) => {
+const Button = ({ children, onClick, disabled, className }) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       className={cssUtils.conditionalClasses({
         [base.button]: true,
+        [base.disabled]: disabled,
         [className]: true,
       })}
     >
@@ -21,10 +23,12 @@ const Button = ({ children, onClick, className }) => {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 }
 
 Button.defaultProps = {
   outline: false,
+  disabled: false,
   onClick: () => {},
 };
 

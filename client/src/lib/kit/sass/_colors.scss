@@ -5,6 +5,9 @@ $white: #F6F6F6;
 $primary: #B54EC7;
 $google: #D1422B;
 $facebook: #3963C7;
+$danger: #D96C51;
+$warning: #D69D43;
+$success: #58A35D;
 
 
 :export {
@@ -15,4 +18,7 @@ $facebook: #3963C7;
   primary: $primary;
   google: $google;
   facebook: $facebook;
+  danger: $danger;
+  warning: $warning;
+  success: $success;
 }

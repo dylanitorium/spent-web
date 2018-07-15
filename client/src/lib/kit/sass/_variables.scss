@@ -1,6 +1,9 @@
 @import 'colors';
 
 $theme-colors: (
+  'danger': $danger,
+  'warning': $warning,
+  'success': $success,
   'black': $black,
   'gray': $gray,
   'gray-light': $gray-light,

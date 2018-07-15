@@ -2,9 +2,8 @@
 
 @each $name, $value in $theme-colors {
   .#{$name} {
-    background-color: $value;
     border-color: $value;
-    color: $white;
+    color: $value;
   }
 }
 

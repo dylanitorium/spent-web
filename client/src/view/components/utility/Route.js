@@ -1,27 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route as BaseRoute, Redirect } from 'react-router-dom';
-import { UNAUTHENTICATED } from 'spent/view/routes';
+import { AUTHENTICATED, UNAUTHENTICATED } from 'spent/view/routes';
 
 const Route = (props) => {
-  const { component: Component, isAuthenticated, requiresAuth, ...passProps } = props;
+  const {
+    component: Component,
+    isAuthenticated,
+    authenticatedOnly,
+    unauthenticatedOnly,
+    ...passProps
+  } = props;
 
   return (
     <BaseRoute
       {...passProps}
       render={(props) => {
-        if (!requiresAuth || isAuthenticated) {
-          return <Component {...props} />;
+        if (authenticatedOnly && !isAuthenticated) {
+          return (
+            <Redirect
+              to={{
+                pathname: UNAUTHENTICATED,
+                state: {
+                  from: props.location
+                }
+              }}
+            />
+          );
         }
 
-        return (
-          <Redirect
-            to={{
-              pathname: UNAUTHENTICATED,
-              state: { from: props.location }
-            }}
-          />
-        );
+        if (unauthenticatedOnly && isAuthenticated) {
+          return (
+            <Redirect
+              to={{
+                pathname: AUTHENTICATED,
+                state: { from: props.location }
+              }}
+            />
+          );
+        }
+
+
+        return <Component {...props} />;
       }}
     />
   );
@@ -30,11 +50,11 @@ const Route = (props) => {
 Route.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  requiresAuth: PropTypes.bool,
+  secured: PropTypes.bool,
 };
 
 Route.defaultProps = {
-  requiresAuth: false,
+  authenticatedOnly: false,
 };
 
 export default Route;

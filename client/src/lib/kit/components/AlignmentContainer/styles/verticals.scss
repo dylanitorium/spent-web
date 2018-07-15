@@ -1,4 +1,4 @@
-@import 'spent/view/utils/sass/utils.scss';
+@import 'kit/sass/utils.scss';
 
 @each $alignment, $flex in $verticals {
   .#{$alignment} {

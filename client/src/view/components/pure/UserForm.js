@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import zxcvbn from 'zxcvbn';
 import { Input, Button } from 'kit';
 
 class UserForm extends Component {
   static propTypes = {
     buttonText: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
+    validatePasswordStrength: PropTypes.bool,
   }
 
   static defaultProps = {
     onSubmit: () => {},
+    validatePasswordStrength: true,
   }
 
   state = {
@@ -21,8 +24,9 @@ class UserForm extends Component {
   }
 
   handleChange = (event) => {
+    const { data } = this.state;
     const { name, value } = event.target;
-    this.setState({ data: { [name]: value } });
+    this.setState({ data: { ...data, [name]: value } });
   }
 
   handleSubmit = (event) => {
@@ -43,6 +47,31 @@ class UserForm extends Component {
       : <a onClick={this.toggleMask}>Hide</a>
   }
 
+  getPasswordColor = () => {
+    const { password } = this.state.data;
+
+    if (password.length < 1) {
+      return;
+    }
+
+    const { score } = zxcvbn(password);
+    switch (score) {
+      case 0:
+        return 'danger';
+      case 1:
+        return 'warning';
+      case 2:
+      default:
+        return 'success';
+    }
+  }
+
+  getPasswordValid = () => {
+    const { password } = this.state.data;
+    const { score } = zxcvbn(password);
+    return score >= 2;
+  }
+
   render() {
     const { buttonText } = this.props;
     const { maskPassword } = this.state;
@@ -61,8 +90,9 @@ class UserForm extends Component {
           onChange={this.handleChange}
           value={this.state.data.password}
           rightIcon={this.getMaskIcon()}
+          color={this.getPasswordColor()}
         />
-        <Button>{buttonText}</Button>
+        <Button disabled={!this.getPasswordValid()}>{buttonText}</Button>
       </form>
     );
   }
