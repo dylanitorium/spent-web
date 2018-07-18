@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import KitPropTypes from 'kit/prop-types';
 
-const color = (styles = { black: '' }, defaultColor = 'black') => (WrappedComponent) => {
-  return class colorInteral extends Component {
-    static propTypes = {
-      color: KitPropTypes.themeColors,
-    }
+const colorProvider = (styles = { black: '' }, defaultColor = 'black') => (WrappedComponent) => {
+  const colorInteral = ({ color, className, ...props }) => {
+    const classes = className ? `${className} ${styles[color]}` : styles[color];
+    return <WrappedComponent className={classes} {...props} />;
+  };
 
-    static defaultProps = {
-      color: defaultColor,
-    }
+  colorInteral.propTypes = {
+    color: KitPropTypes.themeColors,
+    className: PropTypes.string,
+  };
 
-    render() {
-      const { color, className, ...props } = this.props;
-      const classes = className ? `${className} ${styles[color]}` : styles[color];
-      return <WrappedComponent className={classes} {...props} />
-    }
-  }
+  colorInteral.defaultProps = {
+    color: defaultColor,
+    className: '',
+  };
 };
 
-export default color;
+export default colorProvider;

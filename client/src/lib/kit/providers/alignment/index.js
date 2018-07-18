@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import alignments from './styles.scss';
 
-const alignment = (styles = alignments) => (WrappedComponent) => {
-  return class alignmentInteral extends Component {
-    static propTypes = {
-      align: PropTypes.oneOf(['left', 'center', 'right', false]),
-    }
+const alignmentProvider = (styles = alignments) => (WrappedComponent) => {
+  const alignmentInteral = ({ align, className, ...props }) => {
+    const classes = className
+      ? `${className} ${styles[align]}`
+      : styles[align];
+    return <WrappedComponent className={classes} {...props} />;
+  };
 
-    static defaultProps = {
-      align: 'left',
-    }
+  alignmentInteral.propTypes = {
+    align: PropTypes.oneOf(['left', 'center', 'right', false]),
+    className: PropTypes.string,
+  };
 
-    render() {
-      const { align, className, ...props } = this.props;
-      const classes = className ? `${className} ${styles[align]}` : styles[align];
-      return <WrappedComponent className={classes} {...props} />
-    }
-  }
+  alignmentInteral.defaultProps = {
+    align: 'left',
+    className: '',
+  };
+
+  return alignmentInteral;
 };
 
-export default alignment;
+export default alignmentProvider;

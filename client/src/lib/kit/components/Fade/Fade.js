@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ReactRouterCSSTransition from 'react-router-css-transition';
@@ -19,6 +20,12 @@ const Router = ({ children, location, history }) => (
   </TransitionGroup>
 );
 
+Router.propTypes = {
+  children: PropTypes.node.isRequired,
+  location: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
+};
+
 const Basic = ({ children, stateKey, style }) => (
   <TransitionGroup style={style}>
     <CSSTransition
@@ -31,7 +38,13 @@ const Basic = ({ children, stateKey, style }) => (
   </TransitionGroup>
 );
 
+Basic.propTypes = {
+  children: PropTypes.node.isRequired,
+  stateKey: PropTypes.string.isRequired,
+  style: PropTypes.shape().isRequired,
+};
+
 export default {
   Router,
-  Basic
+  Basic,
 };

@@ -4,109 +4,13 @@ import addOneClass from 'dom-helpers/class/addClass';
 import removeOneClass from 'dom-helpers/class/removeClass';
 import RouterTransition from './Transition';
 
-import { CSSTransition } from 'react-transition-group';
 
 const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
 const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
 
-const propTypes = {
-  ...CSSTransition.propTypes,
-  history: PropTypes.object,
-};
 
 class ReactRouterCSSTransition extends React.Component {
-  onEnter = (node, appearing) => {
-    const { className } = this.getClassNames(appearing ? 'appear' : 'enter')
-
-    this.removeClasses(node, 'exit');
-    addClass(node, className)
-
-    if (this.props.onEnter) {
-      this.props.onEnter(node)
-    }
-  }
-
-  onEntering = (node, appearing) => {
-    const { activeClassName } = this.getClassNames(
-      appearing ? 'appear' : 'enter'
-    );
-
-    this.reflowAndAddClass(node, activeClassName)
-
-    if (this.props.onEntering) {
-      this.props.onEntering(node)
-    }
-  }
-
-  onEntered = (node, appearing) => {
-    this.removeClasses(node, appearing ? 'appear' : 'enter');
-
-    if (this.props.onEntered) {
-      this.props.onEntered(node)
-    }
-  }
-
-  onExit = (node) => {
-    const { className } = this.getClassNames('exit')
-
-    this.removeClasses(node, 'appear');
-    this.removeClasses(node, 'enter');
-    addClass(node, className)
-
-    if (this.props.onExit) {
-      this.props.onExit(node)
-    }
-  }
-
-  onExiting = (node) => {
-    const { activeClassName } = this.getClassNames('exit')
-
-    this.reflowAndAddClass(node, activeClassName)
-
-    if (this.props.onExiting) {
-      this.props.onExiting(node)
-    }
-  }
-
-  onExited = (node) => {
-    this.removeClasses(node, 'exit');
-
-
-    if (this.props.onExited) {
-      this.props.onExited(node)
-    }
-  }
-
-  getClassNames = (type) => {
-    const { classNames, history: { action } } = this.props;
-
-    let className = typeof classNames !== 'string'
-      ? classNames[type] + '-' + action.toLowerCase()
-      : classNames + '-' + type + '-' + action.toLowerCase();
-
-    let activeClassName = typeof classNames !== 'string'
-      ? classNames[type + 'Active'] + '-' + action.toLowerCase()
-      : className + '-active';
-
-    let doneClassName = typeof classNames !== 'string'
-      ? classNames[type + 'Done'] + '-' + action.toLowerCase()
-      : className + '-done';
-
-    return {
-      className,
-      activeClassName,
-      doneClassName
-    };
-  }
-
-  removeClasses(node, type) {
-    const { className, activeClassName, doneClassName } = this.getClassNames(type)
-    className && removeClass(node, className);
-    activeClassName && removeClass(node, activeClassName);
-    doneClassName && removeClass(node, doneClassName);
-  }
-
-  reflowAndAddClass(node, className) {
+  static reflowAndAddClass(node, className) {
     // This is for to force a repaint,
     // which is necessary in order to transition styles when adding a class name.
     if (className) {
@@ -115,6 +19,107 @@ class ReactRouterCSSTransition extends React.Component {
       /* eslint-enable no-unused-expressions */
       addClass(node, className);
     }
+  }
+
+  onEnter = (node, appearing) => {
+    const { props } = this;
+    const { className } = this.getClassNames(appearing ? 'appear' : 'enter');
+
+    this.removeClasses(node, 'exit');
+    addClass(node, className);
+
+    if (props.onEnter) {
+      props.onEnter(node);
+    }
+  };
+
+  onEntering = (node, appearing) => {
+    const { props } = this;
+    const { activeClassName } = this.getClassNames(
+      appearing ? 'appear' : 'enter',
+    );
+
+    ReactRouterCSSTransition.reflowAndAddClass(node, activeClassName);
+
+    if (props.onEntering) {
+      props.onEntering(node);
+    }
+  };
+
+  onEntered = (node, appearing) => {
+    const { props } = this;
+    this.removeClasses(node, appearing ? 'appear' : 'enter');
+
+    if (props.onEntered) {
+      props.onEntered(node);
+    }
+  };
+
+  onExit = (node) => {
+    const { props } = this;
+    const { className } = this.getClassNames('exit');
+
+    this.removeClasses(node, 'appear');
+    this.removeClasses(node, 'enter');
+    addClass(node, className);
+
+    if (props.onExit) {
+      props.onExit(node);
+    }
+  };
+
+  onExiting = (node) => {
+    const { props } = this;
+    const { activeClassName } = this.getClassNames('exit');
+
+    ReactRouterCSSTransition.reflowAndAddClass(node, activeClassName);
+
+    if (props.onExiting) {
+      props.onExiting(node);
+    }
+  };
+
+  onExited = (node) => {
+    const { props } = this;
+    this.removeClasses(node, 'exit');
+
+    if (props.onExited) {
+      props.onExited(node);
+    }
+  };
+
+  getClassNames = (type) => {
+    const {
+      classNames,
+      history: { action },
+    } = this.props;
+
+    const className = typeof classNames !== 'string'
+      ? `${classNames[type]}-${action.toLowerCase()}`
+      : `${classNames}-${type}-${action.toLowerCase()}`;
+
+    const activeClassName = typeof classNames !== 'string'
+      ? `${classNames[`${type}Active`]}-${action.toLowerCase()}`
+      : `${className}-active`;
+
+    const doneClassName = typeof classNames !== 'string'
+      ? `${classNames[`${type}Done`]}-${action.toLowerCase()}`
+      : `${className}-done`;
+
+    return {
+      className,
+      activeClassName,
+      doneClassName,
+    };
+  };
+
+  removeClasses(node, type) {
+    const { className, activeClassName, doneClassName } = this.getClassNames(
+      type,
+    );
+    if (className) removeClass(node, className);
+    if (activeClassName) removeClass(node, activeClassName);
+    if (doneClassName) removeClass(node, doneClassName);
   }
 
   render() {
@@ -135,8 +140,26 @@ class ReactRouterCSSTransition extends React.Component {
   }
 }
 
-ReactRouterCSSTransition.propTypes = propTypes;
+ReactRouterCSSTransition.propTypes = {
+  history: PropTypes.shape().isRequired,
+  onEnter: PropTypes.func,
+  onEntering: PropTypes.func,
+  onEntered: PropTypes.func,
+  onExit: PropTypes.func,
+  onExiting: PropTypes.func,
+  onExited: PropTypes.func,
+  classNames: PropTypes.string,
+};
+
+ReactRouterCSSTransition.defaultProps = {
+  onEnter: () => {},
+  onEntering: () => {},
+  onEntered: () => {},
+  onExit: () => {},
+  onExiting: () => {},
+  onExited: () => {},
+  classNames: '',
+};
+
 
 export default ReactRouterCSSTransition;
-
-

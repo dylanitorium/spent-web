@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import { levels } from './styles';
 import provide, { alignment } from 'kit/providers';
+import { levels } from './styles';
 
 const tags = {
- 'one': 'h1',
- 'two': 'h2',
- 'three': 'h3',
- 'four': 'h4',
- 'five': 'h5',
- 'six': 'h6',
+  one: 'h1',
+  two: 'h2',
+  three: 'h3',
+  four: 'h4',
+  five: 'h5',
+  six: 'h6',
 };
 
-const Title = ({ children, level, className, ...props }) => {
+const Title = ({
+  children, level, className, ...props
+}) => {
   const Component = tags[level];
 
   return (
@@ -29,7 +31,7 @@ const Title = ({ children, level, className, ...props }) => {
       {children}
     </Component>
   );
-}
+};
 
 Title.propTypes = {
   className: PropTypes.string.isRequired,
@@ -39,7 +41,6 @@ Title.propTypes = {
 
 Title.defaultProps = {
   level: 'one',
-}
+};
 
 export default provide(alignment())(Title);
-

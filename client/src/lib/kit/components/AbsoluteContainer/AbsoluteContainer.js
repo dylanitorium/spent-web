@@ -9,17 +9,26 @@ const AbsoluteContainer = (props) => {
   } = props;
 
   return (
-    <div className={styles.container} style={{
-      top, right, bottom, left,
-      zIndex, ...style,
-    }} {...rest}>
+    <div
+      className={styles.container}
+      style={{
+        top,
+        right,
+        bottom,
+        left,
+        zIndex,
+        ...style,
+      }}
+      {...rest}
+    >
       {children}
     </div>
-  )
+  );
 };
 
 AbsoluteContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.shape(),
   top: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -49,6 +58,7 @@ AbsoluteContainer.defaultProps = {
   bottom: 'initial',
   left: 'initial',
   zIndex: 'initial',
+  style: {},
 };
 
 export default AbsoluteContainer;

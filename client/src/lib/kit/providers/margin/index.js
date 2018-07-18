@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import margins from './styles.scss';
 
-const margin = (styles = margins) => (WrappedComponent) => {
-  return class marginInteral extends Component {
-    static propTypes = {
-      className: PropTypes.string,
-      margin: PropTypes.oneOf(['top', 'right', 'bottom', 'left', false]),
-    }
+const marginProvider = (styles = margins) => (WrappedComponent) => {
+  const marginInteral = ({ margin, className, ...props }) => {
+    const classes = margin ? `${className} ${styles[margin]}` : className;
+    return <WrappedComponent className={classes} {...props} />;
+  };
 
-    static defaultProps = {
-      margin: 'bottom',
-      className: '',
-    }
+  marginInteral.propTypes = {
+    className: PropTypes.string,
+    margin: PropTypes.oneOf(['top', 'right', 'bottom', 'left', false]),
+  };
 
-    render() {
-      const { margin, className, ...props } = this.props;
-      const classes = margin ? `${className} ${styles[margin]}` : className;
-      return <WrappedComponent className={classes} {...props} />
-    }
-  }
+  marginInteral.defaultProps = {
+    margin: 'bottom',
+    className: '',
+  };
 };
 
-export default margin;
+export default marginProvider;

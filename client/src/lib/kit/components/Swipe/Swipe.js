@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import ReactRouterCSSTransition from 'react-router-css-transition';
@@ -18,5 +19,11 @@ const Swipe = ({ children, location, history }) => (
     </ReactRouterCSSTransition>
   </TransitionGroup>
 );
+
+Swipe.propTypes = {
+  children: PropTypes.node.isRequired,
+  location: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
+};
 
 export default Swipe;
