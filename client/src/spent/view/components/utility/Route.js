@@ -12,51 +12,50 @@ const Route = (props) => {
     ...passProps
   } = props;
 
-  const RouteRender = ({ location }) => {
-    if (authenticatedOnly && !isAuthenticated) {
-      return (
-        <Redirect
-          to={{
-            pathname: UNAUTHENTICATED,
-            state: {
-              from: location,
-            },
-          }}
-        />
-      );
-    }
+  return (
+    <BaseRoute
+      {...passProps}
+      render={({ location }) => {
+        if (authenticatedOnly && !isAuthenticated) {
+          return (
+            <Redirect
+              to={{
+                pathname: UNAUTHENTICATED,
+                state: {
+                  from: location,
+                },
+              }}
+            />
+          );
+        }
 
-    if (unauthenticatedOnly && isAuthenticated) {
-      return (
-        <Redirect
-          to={{
-            pathname: AUTHENTICATED,
-            state: { from: location },
-          }}
-        />
-      );
-    }
+        if (unauthenticatedOnly && isAuthenticated) {
+          return (
+            <Redirect
+              to={{
+                pathname: AUTHENTICATED,
+                state: { from: location },
+              }}
+            />
+          );
+        }
 
-    return <Component {...props} />;
-  };
-
-  RouteRender.propTypes = { location: PropTypes.shape().isRequired };
-
-  return <BaseRoute {...passProps} render={RouteRender} />;
+        return <Component {...props} />;
+      }}
+    />
+  );
 };
 
 Route.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   authenticatedOnly: PropTypes.bool,
-  unauthenticatedOnly: PropTypes.bool,
-  secured: PropTypes.bool,
+  unauthenticatedOnly: PropTypes.bool, //eslint-disable-line
 };
 
 Route.defaultProps = {
   authenticatedOnly: false,
   unauthenticatedOnly: false,
-  secured: false,
 };
 
 export default Route;

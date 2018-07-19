@@ -87,7 +87,7 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
-      spent: path.resolve('src'),
+      spent: path.resolve('src/spent'),
       kit: path.resolve('src/lib/kit'),
       'react-router-css-transition': path.resolve('src/lib/react-router-css-transition'),
       focal: path.resolve('src/lib/focal'),

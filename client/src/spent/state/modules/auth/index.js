@@ -31,6 +31,7 @@ const reducerActions = {
 const actions = {
   authenticate: {
     withEmailAndPassword: ({ email, password }) => (dispatch) => {
+      focal.set('Signing in...');
       dispatch(reducerActions.authenticate.start());
       authentication.startSession.with.emailAndPassword(email, password)
         .catch(error => dispatch(reducerActions.authenticate.failure(error)));
@@ -39,6 +40,12 @@ const actions = {
       focal.set('Signing in with Google...');
       dispatch(reducerActions.authenticate.start());
       authentication.startSession.with.google()
+        .catch(error => dispatch(reducerActions.authenticate.failure(error)));
+    },
+    withFacebook: () => (dispatch) => {
+      focal.set('Signing in with Facebook...');
+      dispatch(reducerActions.authenticate.start());
+      authentication.startSession.with.facebook()
         .catch(error => dispatch(reducerActions.authenticate.failure(error)));
     },
   },
@@ -73,7 +80,7 @@ const actions = {
 const initialState = {
   loading: true,
   error: undefined,
-  user: undefined,
+  user: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -123,6 +130,7 @@ const baseSelectors = {
 
 const derivedSelectors = {
   isAuthenticated: createSelector([baseSelectors.user], user => !!user),
+  userPhoto: createSelector([baseSelectors.user], user => user.photoURL),
 };
 
 const selectors = {

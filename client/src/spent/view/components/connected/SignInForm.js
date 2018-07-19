@@ -3,6 +3,7 @@ import Userform from 'spent/view/components/pure/UserForm';
 import { actions } from 'spent/state/modules/auth';
 
 const props = () => ({
+  validatePasswordStrength: false,
   buttonText: 'Sign in',
 });
 

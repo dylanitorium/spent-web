@@ -49,10 +49,10 @@ class UserForm extends Component {
   };
 
   getPasswordColor = () => {
-    const { props, state } = this;
+    const { state } = this;
     const { data } = state;
 
-    if (!props.validatePasswordStrength || data.password.length < 1) {
+    if (data.password.length < 1) {
       return undefined;
     }
 
@@ -69,11 +69,7 @@ class UserForm extends Component {
   };
 
   getPasswordValid = () => {
-    const { props, state } = this;
-
-    if (!props.validatePasswordStrength) {
-      return true;
-    }
+    const { state } = this;
 
     const { data } = state;
     const { score } = zxcvbn(data.password);
@@ -86,7 +82,7 @@ class UserForm extends Component {
   };
 
   render() {
-    const { buttonText } = this.props;
+    const { buttonText, validatePasswordStrength } = this.props;
     const { maskPassword, data } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
@@ -103,9 +99,9 @@ class UserForm extends Component {
           onChange={this.onChange}
           value={data.password}
           rightIcon={this.getMaskIcon()}
-          color={this.getPasswordColor()}
+          color={validatePasswordStrength && this.getPasswordColor()}
         />
-        <Button disabled={!this.getPasswordValid()}>
+        <Button type="submit" disabled={validatePasswordStrength && !this.getPasswordValid()}>
           {buttonText}
         </Button>
       </form>

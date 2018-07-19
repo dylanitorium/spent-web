@@ -17,6 +17,8 @@ const marginProvider = (styles = margins) => (WrappedComponent) => {
     margin: 'bottom',
     className: '',
   };
+
+  return marginInteral;
 };
 
 export default marginProvider;

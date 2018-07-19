@@ -27,11 +27,13 @@ export default () => (
             exact
             authenticatedOnly
             path={AUTHENTICATED}
-            component={
-              () => <Dashboard store={store} unauthenticate={authActions.unauthenticate} />
-            }
+            component={Dashboard}
           />
-          <Route unauthenticatedOnly path={UNAUTHENTICATED} component={Unauthenticated} />
+          <Route
+            unauthenticatedOnly
+            path={UNAUTHENTICATED}
+            component={Unauthenticated}
+          />
         </Switch>
       </Router>
     </LoadingGate>

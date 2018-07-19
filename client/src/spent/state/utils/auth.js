@@ -9,6 +9,9 @@ const authentication = ({
       google: async () => (
         firebase.auth().signInWithRedirect((new firebase.auth.GoogleAuthProvider()))
       ),
+      facebook: async () => (
+        firebase.auth().signInWithRedirect((new firebase.auth.FacebookAuthProvider()))
+      ),
     },
   },
   createUser: {
@@ -19,7 +22,9 @@ const authentication = ({
     },
   },
   endSession: async () => firebase.auth().signOut(),
-  listen: callback => firebase.auth().onAuthStateChanged(callback),
+  listen: (callback) => {
+    firebase.auth().onAuthStateChanged(callback);
+  },
 });
 
 export default authentication;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
 import {
   AlignmentContainer,
@@ -12,26 +11,9 @@ import {
   LinkButton as Button,
 } from 'spent/view/components/utility';
 import routes from 'spent/view/routes';
+import UserMenu from 'spent/view/components/connected/UserMenu';
 
-const Avatar = ({ store, unauthenticate }) => (
-  <button
-    type="button"
-    style={{
-      border: '1px solid black',
-      borderRadius: '50%',
-      width: '40px',
-      height: '40px',
-    }}
-    onClick={() => store.dispatch(unauthenticate())}
-  />
-);
-
-Avatar.propTypes = {
-  store: PropTypes.shape().isRequired,
-  unauthenticate: PropTypes.func.isRequired,
-};
-
-const Dashboard = ({ store, unauthenticate }) => (
+const Dashboard = () => (
   <Route
     render={() => (
       <div>
@@ -40,10 +22,10 @@ const Dashboard = ({ store, unauthenticate }) => (
             <AlignmentContainer horizontal="space-between" direction="row">
               <Link to={routes.dashboard}>
                 <Title level="three">
-Spent.
+                  Spent.
                 </Title>
               </Link>
-              <Avatar store={store} unauthenticate={unauthenticate} />
+              <UserMenu />
             </AlignmentContainer>
           </header>
         </AbsoluteContainer>
@@ -51,9 +33,7 @@ Spent.
           <AlignmentContainer>
             <Container>
               <Text size="large" color="gray-light" align="center">
-                You
-                {'don\'t'}
-                have a budget yet
+                {"You don't have a budget yet"}
               </Text>
               <Button>
                 Create a budget
@@ -65,10 +45,5 @@ Spent.
     )}
   />
 );
-
-Dashboard.propTypes = {
-  store: PropTypes.shape().isRequired,
-  unauthenticate: PropTypes.func.isRequired,
-};
 
 export default Dashboard;

@@ -17,6 +17,8 @@ const colorProvider = (styles = { black: '' }, defaultColor = 'black') => (Wrapp
     color: defaultColor,
     className: '',
   };
+
+  return colorInteral;
 };
 
 export default colorProvider;
