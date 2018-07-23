@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import Userform from 'spent/view/components/pure/UserForm';
-import { actions } from 'spent/state/modules/auth';
+import { actions, selectors } from 'spent/state/modules/auth';
 
-const props = () => ({
+const props = state => ({
   validatePasswordStrength: false,
   buttonText: 'Sign in',
+  error: selectors.errorMessage(state),
 });
 
 const dispatch = {

@@ -7,7 +7,7 @@ class UserForm extends Component {
   static propTypes = {
     buttonText: PropTypes.string.isRequired,
     onSubmit: PropTypes.func, //eslint-disable-line
-    validatePasswordStrength: PropTypes.bool //eslint-disable-line
+    validatePasswordStrength: PropTypes.bool, //eslint-disable-line
   };
 
   static defaultProps = {

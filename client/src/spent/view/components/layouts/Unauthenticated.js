@@ -19,13 +19,14 @@ import SignUpForm from 'spent/view/components/connected/SignUpForm';
 import SignInForm from 'spent/view/components/connected/SignInForm';
 import GoogleSignInButton from 'spent/view/components/connected/GoogleSignInButton';
 import FacebookSignInButton from 'spent/view/components/connected/FacebookSignInButton';
+import AuthMessage from 'spent/view/components/connected/AuthMessage';
 
 LinkedText.propTypes = {
   to: PropTypes.string.isRequired,
 };
 
 const FullScreenAlign = ({ children, id }) => (
-  <AbsoluteContainer id={id} top={0} left={0} right={0} bottom={0}>
+  <AbsoluteContainer id={id} top={80} left={0} right={0} bottom={0}>
     <AlignmentContainer>
       <Container>
         {children}
@@ -59,7 +60,11 @@ const Unauthenticated = () => (
           )}
           />
         </Fade.Router>
-        <AbsoluteContainer top={80} left={0} right={0}>
+        <AbsoluteContainer top={60} left={0} right={0}>
+          <AuthMessage />
+        </AbsoluteContainer>
+        <AbsoluteContainer top={120} left={0} right={0}>
+
           <Title align="center">
             Spent.
           </Title>

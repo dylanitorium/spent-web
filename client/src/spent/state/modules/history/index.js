@@ -46,4 +46,6 @@ const selectors = {
   ...baseSelectors,
 };
 
-export { actions, reducer, selectors };
+export {
+  reducer, selectors, actions, actionTypes,
+};

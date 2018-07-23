@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Userform from 'spent/view/components/pure/UserForm';
-import { actions } from 'spent/state/modules/auth';
+import { actions, selectors } from 'spent/state/modules/auth';
 
-const props = () => ({
+const props = state => ({
   buttonText: 'Sign up',
+  error: selectors.errorMessage(state),
 });
 
 const dispatch = {

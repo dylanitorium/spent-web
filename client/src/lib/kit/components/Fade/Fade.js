@@ -41,7 +41,11 @@ const Basic = ({ children, stateKey, style }) => (
 Basic.propTypes = {
   children: PropTypes.node.isRequired,
   stateKey: PropTypes.string.isRequired,
-  style: PropTypes.shape().isRequired,
+  style: PropTypes.shape(),
+};
+
+Basic.defaultProps = {
+  style: {},
 };
 
 export default {

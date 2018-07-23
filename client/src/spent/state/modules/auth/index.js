@@ -12,6 +12,7 @@ const actionTypes = {
   authenticate: createAsyncActionCreator('auth/authenticate'),
   unauthenticate: createAsyncActionCreator('auth/unauthenticate'),
   listening: 'spent/auth/listening',
+  error: { clear: 'spent/auth/error/clear' },
 };
 
 const reducerActions = {
@@ -26,6 +27,9 @@ const reducerActions = {
     failure: error => ({ type: actionTypes.unauthenticate.failure, error }),
   },
   listening: () => ({ type: actionTypes.listening }),
+  error: {
+    clear: () => ({ type: actionTypes.error.clear }),
+  },
 };
 
 const actions = {
@@ -75,6 +79,9 @@ const actions = {
     authentication.endSession()
       .catch(error => dispatch(reducerActions.unauthenticate.failure(error)));
   },
+  error: {
+    clear: reducerActions.error.clear,
+  },
 };
 
 const initialState = {
@@ -118,6 +125,11 @@ const reducer = (state = initialState, action) => {
         error: payload.error,
         loading: false,
       };
+    case actionTypes.error.clear:
+      return {
+        ...state,
+        error: undefined,
+      };
     default:
       return state;
   }
@@ -126,11 +138,13 @@ const reducer = (state = initialState, action) => {
 const baseSelectors = {
   loading: state => state.auth.loading,
   user: state => state.auth.user,
+  error: state => state.auth.error,
 };
 
 const derivedSelectors = {
   isAuthenticated: createSelector([baseSelectors.user], user => !!user),
   userPhoto: createSelector([baseSelectors.user], user => user.photoURL),
+  errorMessage: createSelector([baseSelectors.error], error => error && error.message),
 };
 
 const selectors = {
@@ -138,4 +152,6 @@ const selectors = {
   ...derivedSelectors,
 };
 
-export { reducer, selectors, actions };
+export {
+  reducer, selectors, actions, actionTypes,
+};

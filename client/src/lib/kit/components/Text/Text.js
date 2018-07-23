@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cssUtils } from 'spent/view/utils';
-import provide, { margin, alignment, color } from 'kit/providers';
+import provide, {
+  margin,
+  alignment,
+  color,
+  conditional,
+} from 'kit/providers';
 import { colors, displays, sizes } from './styles';
 
 const Text = ({
@@ -36,4 +41,5 @@ export default provide(
   margin(),
   alignment(),
   color(colors),
+  conditional,
 )(Text);
