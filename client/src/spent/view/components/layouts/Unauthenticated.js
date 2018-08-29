@@ -26,7 +26,7 @@ LinkedText.propTypes = {
 };
 
 const FullScreenAlign = ({ children, id }) => (
-  <AbsoluteContainer id={id} top={80} left={0} right={0} bottom={0}>
+  <AbsoluteContainer id={id} top={80} left="50%" right={0} bottom={0} style={{ marginLeft: '-187.5px', maxWidth: '375px' }}>
     <AlignmentContainer>
       <Container>
         {children}
@@ -44,7 +44,7 @@ FullScreenAlign.propTypes = {
 const Unauthenticated = () => (
   <Route
     render={({ location, history }) => (
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
         <Fade.Router history={history} location={location}>
           <Route exact path={routes.auth.index} component={null} />
           <Route render={() => (

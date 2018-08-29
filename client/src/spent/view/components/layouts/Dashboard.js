@@ -29,7 +29,7 @@ const Dashboard = () => (
             </AlignmentContainer>
           </header>
         </AbsoluteContainer>
-        <AbsoluteContainer top={0} right={0} left={0} bottom={0}>
+        <AbsoluteContainer top={0} left="50%" right={0} bottom={0} style={{ marginLeft: '-187.5px', maxWidth: '375px' }}>
           <AlignmentContainer>
             <Container>
               <Text size="large" color="gray-light" align="center">

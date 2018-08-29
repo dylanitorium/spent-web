@@ -6,7 +6,7 @@ import ReactRouterCSSTransition from 'react-router-css-transition';
 import './swipe.css';
 
 const Swipe = ({ children, location, history }) => (
-  <TransitionGroup>
+  <TransitionGroup style={{ height: '1px' }}>
     <ReactRouterCSSTransition
       key={location.key}
       timeout={300}
